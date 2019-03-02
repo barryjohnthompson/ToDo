@@ -7,6 +7,9 @@ TODO:
 """
 
 class Task():
+    """
+    Model a todo list task.
+    """
 
     states = ["to do", "doing", "done"]
 
@@ -20,6 +23,9 @@ class Task():
 
     
     def __str__(self):
+        """
+        Overload the string representation to a nicer format.
+        """
 
         return "Title: {}\t Status: {}".format(self.title, self.state)
 
@@ -72,6 +78,9 @@ class ToDoList():
     
 
     def addTask(self, title):
+        """
+        Add a task to this to do list.
+        """
 
         self.tasks.append( Task(title=title) )
 
@@ -79,6 +88,11 @@ class ToDoList():
 
 
     def find(self, title):
+        """
+        Find a task in the to do list.
+        Args:
+            title(string) - the task title to search for
+        """
 
         retTask = None
         for task in self.tasks:
@@ -92,6 +106,12 @@ class ToDoList():
 
     
     def updateTaskState(self, taskTitle, newState):
+        """
+        Update the state of a task in this list.
+        Args:
+            taskTitle(string) - the title of the task to update
+            newState(string)  - the new state of the task
+        """
 
         task = self.find(taskTitle)
         task.changeState(state=newState)
