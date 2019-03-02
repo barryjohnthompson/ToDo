@@ -77,13 +77,23 @@ class ToDoList():
 
         return
 
+
+    def find(self, title):
+
+        retTask = None
+        for task in self.tasks:
+            if task.title.lower() == title.lower():
+                retTask = task
+
+        if retTask == None:
+            print("Requested task not found in list")
+
+        return retTask
+
     
     def updateTaskState(self, taskTitle, newState):
 
-        for task in self.tasks:
-            if taskTitle.lower() == task.title.lower():
-                task.changeState(state=newState)
-            else:
-                pass
+        task = self.find(taskTitle)
+        task.changeState(state=newState)
 
         return

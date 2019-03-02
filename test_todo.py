@@ -4,20 +4,73 @@ Tests for the todo.py file
 
 from todo import Task, ToDoList
 
-# task = Task(title="Do laundry")
+def test_CreateTask():
+    
+    task = Task(title="Do laundry")
 
-# task.show()
+    assert isinstance(task, Task)
+    assert task.title == "Do laundry"
 
-tdlist = ToDoList(title="Chores")
+    return
 
-tdlist.addTask( "Do laundry" )
-tdlist.addTask( "Get groceries" )
 
-tdlist.show()
+def test_CreateToDoList():
 
-print("\nAfter updating...\n")
+    tdList = ToDoList(title="Chores")
 
-tdlist.updateTaskState("Do laundry", "done")
-tdlist.updateTaskState("Get groceries", "doing")
+    assert isinstance(tdList, ToDoList)
+    assert tdList.title == "Chores"
 
-tdlist.show()
+    return
+
+
+def test_AddTaskToList():
+
+    td = ToDoList("Work")
+
+    td.addTask("Get promotion")
+    td.addTask("Do the thing")
+    td.addTask("Set up meeting with Bob")
+
+    assert len(td.tasks)== 3
+
+    return
+
+
+def test_FindTaskInList():
+
+    td = ToDoList("Chores")
+
+    td.addTask("Get promotion")
+    td.addTask("Do the thing")
+    td.addTask("Set up meeting with Bob")
+
+    task = td.find("Get promotion")
+
+    assert task.title == "Get promotion"
+
+    return
+
+
+def test_DefaultStateSet():
+
+    td = ToDoList("Chores")
+
+    td.addTask("Hoover floor")
+
+    assert td.find("Hoover floor").state == "to do"
+
+    return
+
+
+def test_UpdateState():
+
+    td = ToDoList("Chores")
+
+    td.addTask("Wash dishes")
+
+    td.updateTaskState(taskTitle="Wash dishes", newState="done")
+
+    assert td.find("Wash dishes").state == "done"
+
+    return
